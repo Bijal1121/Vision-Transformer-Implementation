@@ -1,13 +1,11 @@
 # Vision Transformer (ViT) — From Scratch & Transfer Learning
 
-This repository demonstrates two implementations of **Vision Transformers (ViT)** using PyTorch:
+This repository contains two implementations of **Vision Transformers (ViT)** using PyTorch:
 
-1. **ViT implemented from scratch** on the MNIST dataset  
-2. **Pretrained ViT fine-tuned** on CIFAR-10  
+1. A complete **ViT architecture implemented from scratch**
+2. A **pretrained ViT fine-tuned** using transfer learning
 
-The goal of this project is to understand both:
-- The internal architecture of Vision Transformers  
-- Practical transfer learning and fine-tuning workflows  
+The project demonstrates both architectural understanding and a practical deep learning workflow.
 
 ---
 
@@ -22,100 +20,137 @@ The goal of this project is to understand both:
 
 ---
 
-# 1️⃣ Vision Transformer from Scratch (MNIST)
+# 1️⃣ Vision Transformer From Scratch (MNIST)
 
-**File:** `ViT_Implementation.ipynb`
+**Notebook:** `ViT_Implementation.ipynb`
 
-## Overview
+## Objective
 
-This notebook implements the Vision Transformer architecture from first principles using PyTorch, without relying on pretrained transformer layers.
-
-The model is trained on the **MNIST dataset** for handwritten digit classification.
+Manually implement the Vision Transformer architecture without relying on pretrained transformer modules.
 
 ---
 
-## Architecture Components
+## Architecture Overview
+
+The following components are implemented from first principles:
 
 ### Patch Embedding
-- Image divided into fixed-size patches  
-- Each patch flattened and projected into embedding space  
-- Converts the image into a sequence of tokens  
+- Image split into fixed-size patches  
+- Patches flattened and projected into embedding space  
+- Image converted into a token sequence  
 
-### Learnable Class Token
-- `[CLS]` token prepended to the patch sequence  
+### Learnable `[CLS]` Token
+- Prepended to the token sequence  
 - Used for final classification  
 
 ### Positional Embeddings
 - Learnable positional encodings  
-- Preserve spatial information  
+- Preserve spatial ordering  
 
 ### Multi-Head Self-Attention
 - Query, Key, Value projections  
 - Scaled dot-product attention  
 - Multiple attention heads  
-- Output projection layer  
+- Output projection  
 
 ### Transformer Encoder Block
 Each encoder block includes:
 - Layer Normalization  
 - Multi-Head Self-Attention  
 - Residual connections  
-- Feed-forward network (MLP)  
+- Feed-forward MLP  
 - Dropout (if applied)  
 
 ### Classification Head
-- Final `[CLS]` token passed through a linear layer  
-- Outputs digit class probabilities (0–9)  
+- Final `[CLS]` token passed to linear layer  
+- Outputs digit probabilities (0–9)
 
 ---
 
-## Training Details (From Scratch Model)
+## Model Configuration (From Scratch)
 
 - Dataset: MNIST  
 - Optimizer: Adam  
-- Loss Function: CrossEntropyLoss  
+- Loss: CrossEntropyLoss  
 - Evaluation Metric: Accuracy  
+- Fully trained from scratch  
 
 ---
 
-# 2️⃣ Vision Transformer Using Pretrained Model (CIFAR-10)
+# 2️⃣ Pretrained ViT Fine-Tuning (CIFAR-10)
 
-**File:** `ViT_using_pretrained_model.ipynb`
+**Notebook:** `ViT_using_pretrained_model.ipynb`
 
-## Overview
+## Objective
 
-This notebook demonstrates transfer learning using a pretrained Vision Transformer model.
-
-**Base Model:**
-- `vit_b_16` from `torchvision`  
-- Pretrained on ImageNet-1K  
-
-The model is fine-tuned on **CIFAR-10**.
+Apply transfer learning using a pretrained Vision Transformer and adapt it to CIFAR-10.
 
 ---
 
-## Implementation Steps
+## Base Model
 
-### Load Pretrained Model
+- `vit_b_16` from `torchvision`
+- Pretrained on ImageNet-1K
 
 ```python
 from torchvision.models import vit_b_16, ViT_B_16_Weights
 model = vit_b_16(weights=ViT_B_16_Weights.IMAGENET1K_V1)
 ```
 
-### Replace Classification Head
+---
+
+## Replace Classification Head
 
 ```python
 model.heads.head = torch.nn.Linear(768, 10)
 ```
 
-### Fine-Tuning Configuration
+---
 
-- **Optimizer:** Adam  
-- **Learning Rate:** 5e-5  
-- **LR Scheduler:** ExponentialLR  
-- **Evaluation Metric:** Accuracy  
-- **Entire model fine-tuned**
+## Fine-Tuning Configuration
+
+- Optimizer: Adam  
+- Learning Rate: 5e-5  
+- LR Scheduler: ExponentialLR  
+- Evaluation Metric: Accuracy  
+- Entire model fine-tuned  
+
+---
+
+# Datasets
+
+- **MNIST**  
+  Loaded using `torchvision.datasets.MNIST`  
+  Automatically downloaded via PyTorch  
+
+- **CIFAR-10**  
+  Loaded using `torchvision.datasets.CIFAR10`  
+  Automatically downloaded via PyTorch  
+
+No manual dataset download is required.
+
+---
+
+# Results
+
+| Model | Dataset | Approach | Accuracy |
+|-------|----------|----------|----------|
+| ViT (From Scratch) | MNIST | Full custom implementation | XX% |
+| Pretrained ViT | CIFAR-10 | Transfer learning + fine-tuning | XX% |
+
+> Replace `XX%` with final results.
+
+---
+
+# Technical Concepts Demonstrated
+
+- Transformer architecture fundamentals  
+- Patch embedding mechanism  
+- Multi-head self-attention  
+- Residual learning  
+- Transfer learning  
+- Fine-tuning pretrained vision models  
+- End-to-end PyTorch training pipeline  
 
 ---
 
@@ -129,3 +164,52 @@ model.heads.head = torch.nn.Linear(768, 10)
 - torchmetrics  
 - NumPy  
 - Matplotlib  
+
+## Install Dependencies
+
+```bash
+pip install torch torchvision torchmetrics numpy matplotlib
+```
+
+---
+
+# How to Run
+
+1. Clone the repository  
+2. Install dependencies  
+3. Open the notebooks:
+   - `ViT_Implementation.ipynb`
+   - `ViT_using_pretrained_model.ipynb`
+4. Run all cells sequentially  
+
+GPU is recommended for faster training, but not required.
+
+---
+
+# Key Learnings
+
+- Implemented Vision Transformer architecture from scratch  
+- Built multi-head attention manually  
+- Understood positional embeddings and residual connections  
+- Applied transfer learning to large pretrained models  
+- Designed a full training and evaluation workflow  
+
+---
+
+# Future Improvements
+
+- Compare ViT vs CNN performance  
+- Experiment with freezing backbone vs full fine-tuning  
+- Train ViT from scratch on CIFAR-10  
+- Perform hyperparameter tuning experiments  
+- Add architectural visualization diagram  
+
+---
+
+# Summary
+
+This repository reflects:
+
+- Conceptual depth through manual transformer implementation  
+- Practical ML engineering skills via transfer learning  
+- Hands-on experience building and training transformer-based vision models  
