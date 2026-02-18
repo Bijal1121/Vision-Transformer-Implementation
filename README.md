@@ -138,20 +138,6 @@ No manual dataset download is required.
 | ViT (From Scratch) | MNIST | Full custom implementation | 93% |
 | Pretrained ViT | CIFAR-10 | Transfer learning + fine-tuning | 95% |
 
-> Replace `XX%` with final results.
-
----
-
-# Technical Concepts Demonstrated
-
-- Transformer architecture fundamentals  
-- Patch embedding mechanism  
-- Multi-head self-attention  
-- Residual learning  
-- Transfer learning  
-- Fine-tuning pretrained vision models  
-- End-to-end PyTorch training pipeline  
-
 ---
 
 # Requirements
