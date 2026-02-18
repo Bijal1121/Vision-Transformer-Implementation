@@ -135,8 +135,8 @@ No manual dataset download is required.
 
 | Model | Dataset | Approach | Accuracy |
 |-------|----------|----------|----------|
-| ViT (From Scratch) | MNIST | Full custom implementation | XX% |
-| Pretrained ViT | CIFAR-10 | Transfer learning + fine-tuning | XX% |
+| ViT (From Scratch) | MNIST | Full custom implementation | 93% |
+| Pretrained ViT | CIFAR-10 | Transfer learning + fine-tuning | 95% |
 
 > Replace `XX%` with final results.
 
@@ -185,31 +185,4 @@ pip install torch torchvision torchmetrics numpy matplotlib
 GPU is recommended for faster training, but not required.
 
 ---
-
-# Key Learnings
-
-- Implemented Vision Transformer architecture from scratch  
-- Built multi-head attention manually  
-- Understood positional embeddings and residual connections  
-- Applied transfer learning to large pretrained models  
-- Designed a full training and evaluation workflow  
-
----
-
-# Future Improvements
-
-- Compare ViT vs CNN performance  
-- Experiment with freezing backbone vs full fine-tuning  
-- Train ViT from scratch on CIFAR-10  
-- Perform hyperparameter tuning experiments  
-- Add architectural visualization diagram  
-
----
-
-# Summary
-
-This repository reflects:
-
-- Conceptual depth through manual transformer implementation  
-- Practical ML engineering skills via transfer learning  
-- Hands-on experience building and training transformer-based vision models  
+  
