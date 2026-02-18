@@ -17,33 +17,35 @@ The goal of this project is to understand both:
 └── README.md
 ---
 
+
+---
+
 # 1️⃣ Vision Transformer from Scratch (MNIST)
 
 **File:** `ViT_Implementation.ipynb`
 
 ## Overview
 
-This notebook implements the Vision Transformer architecture from first principles using PyTorch.  
-No pretrained transformer layers are used.
+This notebook implements the Vision Transformer architecture from first principles using PyTorch, without relying on pretrained transformer layers.
 
 The model is trained on the **MNIST dataset** for handwritten digit classification.
 
 ---
 
-## Architecture Components Implemented
+## Architecture Components
 
 ### Patch Embedding
 - Image divided into fixed-size patches  
-- Each patch flattened and projected to embedding dimension  
-- Converts image into a sequence of tokens  
+- Each patch flattened and projected into embedding space  
+- Converts the image into a sequence of tokens  
 
 ### Learnable Class Token
 - `[CLS]` token prepended to the patch sequence  
 - Used for final classification  
 
 ### Positional Embeddings
-- Learnable positional encodings added  
-- Preserves spatial information  
+- Learnable positional encodings  
+- Preserve spatial information  
 
 ### Multi-Head Self-Attention
 - Query, Key, Value projections  
@@ -52,7 +54,7 @@ The model is trained on the **MNIST dataset** for handwritten digit classificati
 - Output projection layer  
 
 ### Transformer Encoder Block
-Each encoder layer contains:
+Each encoder block includes:
 - Layer Normalization  
 - Multi-Head Self-Attention  
 - Residual connections  
@@ -60,19 +62,19 @@ Each encoder layer contains:
 - Dropout (if applied)  
 
 ### Classification Head
-- Final `[CLS]` token passed to linear layer  
-- Outputs class probabilities (0–9)  
+- Final `[CLS]` token passed through a linear layer  
+- Outputs digit class probabilities (0–9)  
 
 ---
 
-## Training Details
+## Training Details (From Scratch Model)
 
 - Dataset: MNIST  
 - Optimizer: Adam  
 - Loss Function: CrossEntropyLoss  
 - Evaluation Metric: Accuracy  
 
-This implementation demonstrates a full understanding of transformer internals and end-to-end training.
+This implementation reflects a complete understanding of transformer internals and end-to-end model training.
 
 ---
 
@@ -84,8 +86,8 @@ This implementation demonstrates a full understanding of transformer internals a
 
 This notebook demonstrates transfer learning using a pretrained Vision Transformer model.
 
-Base model:
-- `vit_b_16` from `torchvision`
+**Base Model:**
+- `vit_b_16` from `torchvision`  
 - Pretrained on ImageNet-1K  
 
 The model is fine-tuned on **CIFAR-10**.
@@ -100,37 +102,23 @@ The model is fine-tuned on **CIFAR-10**.
 from torchvision.models import vit_b_16, ViT_B_16_Weights
 model = vit_b_16(weights=ViT_B_16_Weights.IMAGENET1K_V1)
 ```
-### Replace Classification Head
-```python
-model.heads.head = torch.nn.Linear(768, 10)
-```
-### Requirements
-Recommended environment:
+### Fine-Tuning Configuration
 
-Python 3.8+
+- **Optimizer:** Adam  
+- **Learning Rate:** 5e-5  
+- **LR Scheduler:** ExponentialLR  
+- **Evaluation Metric:** Accuracy  
+- **Entire model fine-tuned**
 
-PyTorch
+---
 
-torchvision
+# Requirements
 
-torchmetrics
+## Recommended Environment
 
-NumPy
-
-Matplotlib
-
-##Install Dependencies
-```python
-pip install torch torchvision torchmetrics numpy matplotlib
-
-```
-
-### How to Run
-Clone the repository
-1. Install dependencies
-2. Open the notebooks:
-3. ViT_Implementation.ipynb
-  -  ViT_using_pretrained_model.ipynb
-  -  Run all cells sequentially
-GPU is recommended for faster training, but not required.
-
+- Python 3.8+  
+- PyTorch  
+- torchvision  
+- torchmetrics  
+- NumPy  
+- Matplotlib  
