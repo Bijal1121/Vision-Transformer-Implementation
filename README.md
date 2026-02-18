@@ -100,3 +100,82 @@ The model is fine-tuned on **CIFAR-10**.
 from torchvision.models import vit_b_16, ViT_B_16_Weights
 model = vit_b_16(weights=ViT_B_16_Weights.IMAGENET1K_V1)
 
+## Replace Classification Head
+
+```python
+model.heads.head = torch.nn.Linear(768, 10)
+Fine-Tuning Setup
+Optimizer: Adam
+
+Learning Rate: 5e-5
+
+LR Scheduler: ExponentialLR
+
+Evaluation Metric: Accuracy
+
+The entire model is fine-tuned on CIFAR-10.
+
+Results
+Model	Dataset	Description
+ViT (From Scratch)	MNIST	Custom transformer implementation
+Pretrained ViT	CIFAR-10	Transfer learning + fine-tuning
+(Add final accuracy numbers here for completeness.)
+
+Key Concepts Demonstrated
+Transformer architecture fundamentals
+
+Patch embedding mechanism
+
+Multi-head self-attention
+
+Residual learning
+
+Transfer learning
+
+Fine-tuning pretrained vision models
+
+PyTorch training and evaluation pipeline
+
+Requirements
+Recommended environment:
+
+Python 3.8+
+
+PyTorch
+
+torchvision
+
+torchmetrics
+
+NumPy
+
+Matplotlib
+
+Install dependencies
+pip install torch torchvision torchmetrics numpy matplotlib
+How to Run
+Clone the repository
+
+Install dependencies
+
+Open the notebooks:
+
+ViT_Implementation.ipynb
+
+ViT_using_pretrained_model.ipynb
+
+Run all cells sequentially
+
+GPU is recommended for faster training but not required.
+
+Learning Outcome
+This repository demonstrates:
+
+Conceptual understanding of Vision Transformers
+
+Practical deep learning workflow
+
+Transfer learning and fine-tuning techniques
+
+PyTorch-based model engineering
+
