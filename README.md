@@ -12,11 +12,13 @@ The goal of this project is to understand both:
 ---
 
 ## Repository Structure
+
+```
+.
 ├── ViT_Implementation.ipynb
 ├── ViT_using_pretrained_model.ipynb
 └── README.md
----
-
+```
 
 ---
 
@@ -74,8 +76,6 @@ Each encoder block includes:
 - Loss Function: CrossEntropyLoss  
 - Evaluation Metric: Accuracy  
 
-This implementation reflects a complete understanding of transformer internals and end-to-end model training.
-
 ---
 
 # 2️⃣ Vision Transformer Using Pretrained Model (CIFAR-10)
@@ -102,6 +102,13 @@ The model is fine-tuned on **CIFAR-10**.
 from torchvision.models import vit_b_16, ViT_B_16_Weights
 model = vit_b_16(weights=ViT_B_16_Weights.IMAGENET1K_V1)
 ```
+
+### Replace Classification Head
+
+```python
+model.heads.head = torch.nn.Linear(768, 10)
+```
+
 ### Fine-Tuning Configuration
 
 - **Optimizer:** Adam  
